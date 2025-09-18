@@ -6,7 +6,8 @@ def main_menu():
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Энциклопедия бани", callback_data="encyclopedia"),
          InlineKeyboardButton(text="Помощь", callback_data="help")],
-        [InlineKeyboardButton(text="Викторина", callback_data="quiz")]  # новая кнопка
+        [InlineKeyboardButton(text="Викторина", callback_data="quiz")],
+        [InlineKeyboardButton(text="Автосовет дня", callback_data="daily_advice")]  # новая кнопка
     ])
     return kb
 
