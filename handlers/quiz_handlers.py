@@ -1,14 +1,15 @@
 from aiogram import types
 from aiogram.filters import Command
 from managers.quiz_manager import QuizManager
-from keyboards.quiz_keyboard import build_quiz_keyboard
+from keyboards.quiz_keyboard import build_quiz_keyboard_with_back
+
 
 def register_quiz_handlers(dp, quiz_mgr: QuizManager):
     @dp.message(Command("quiz"))
     async def start_quiz(message: types.Message):
         question = quiz_mgr.get_question(0)
         if question:
-            kb = build_quiz_keyboard(question, 0)
+            kb = build_quiz_keyboard_with_back(question, 0)
             await message.answer(question["question"], reply_markup=kb)
 
     @dp.callback_query(lambda c: c.data.startswith("q"))
