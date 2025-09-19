@@ -1,8 +1,26 @@
 from aiogram import types
 from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
 
 def main_menu():
+    kb = InlineKeyboardMarkup(row_width=2)
+    kb.add(
+        InlineKeyboardButton("📖 Энциклопедия", callback_data="encyclopedia"),
+        InlineKeyboardButton("📝 Викторина", callback_data="quiz"),
+        InlineKeyboardButton("💡 Автосовет дня", callback_data="daily_advice"),
+        InlineKeyboardButton("❓ Помощь", callback_data="help")
+    )
+    return kb
+
+def encyclopedia_menu(topics):
+    builder = InlineKeyboardBuilder()
+    for idx, t in enumerate(topics, start=1):
+        builder.add(InlineKeyboardButton(text=t["title"], callback_data=f"topic_{idx}"))
+    builder.add(InlineKeyboardButton(text="🔙 Назад", callback_data="main"))
+    builder.adjust(1)  # 1 кнопка в строке
+    return builder.as_markup()def main_menu():
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Энциклопедия бани", callback_data="encyclopedia"),
          InlineKeyboardButton(text="Помощь", callback_data="help")],
